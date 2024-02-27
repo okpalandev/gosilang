@@ -19,6 +19,7 @@ type(TokenType,
     TOKEN_DELIMETER,
     TOKEN_OPERATOR,
     TOKEN_PUNCTUATOR,
+    TOKEN_INVALID,
     TOKEN_END
 )
 value(TokenValue,

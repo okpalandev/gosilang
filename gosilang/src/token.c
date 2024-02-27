@@ -19,6 +19,7 @@ Token_t *Token_init(TokenType *type, TokenValue *value) {
     return token;
 }
 
+
 void Token_free(Token_t *token) {
     if (token != NULL) {
         free(token->value.data);
