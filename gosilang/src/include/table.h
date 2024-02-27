@@ -20,7 +20,7 @@ struct HashTable_s {
     size_t capacity;
 };
 
-HashTable_t* Hashtable_init(HashTable_t* table);
+HashTable_t* Hashtable_init();
 HashItem_t* HashTable_hash(HashItem_t* table, int key);
 HashTable_t* HashTable_put(HashTable_t* table,int key, char* value);
 void HashTable_free(HashTable_t* table);

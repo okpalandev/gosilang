@@ -4,7 +4,7 @@
 #define INITIAL_CAPACITY 10
 
 // Function to initialize a hash table
-HashTable_t *HashTable_init() {
+HashTable_t* Hashtable_init(){
     HashTable_t *table = (HashTable_t *)malloc(sizeof(HashTable_t));
     if (table == NULL) {
         // Handle memory allocation failure
