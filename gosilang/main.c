@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "tokenizer.h"
 #include "token.h"
 #include "table.h"
@@ -27,7 +26,7 @@ int main(int argc, char *argv[]) {
     SymbolTable *table = SymbolTable_init(10);
 
     Token_t *token;
-    char input[256];
+    char input[1000];
     while (fgets(input, sizeof(input), fp) != NULL) {
         // Tokenize the input
         token = tokenize(tokenizer, input);
