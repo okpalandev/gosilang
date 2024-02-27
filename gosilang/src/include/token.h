@@ -35,8 +35,8 @@ value(TokenValue,
 
 typedef struct Token_s Token_t;
 struct Token_s {
-    TokenType type;
-    TokenValue value;
+    TokenType *type;
+    TokenValue *value;
     int len;
     int line;
 };
