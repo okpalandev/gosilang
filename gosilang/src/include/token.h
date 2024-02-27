@@ -17,6 +17,7 @@
         __VA_ARGS__ \
     } name;
 
+
 type(TokenType,
     TOKEN_KEYWORD,
     TOKEN_IDENTIFIER,

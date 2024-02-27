@@ -27,7 +27,6 @@ void HashTable_put(HashTable *table, int key, const char *value);
 void HashTable_free(HashTable* table);
 
 
-
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
 // using a two-pointer technique.
 typedef struct SymbolEntry_s {
