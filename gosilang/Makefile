@@ -7,11 +7,14 @@ OBJ_DIR := obj
 BIN_DIR := bin
 INCLUDE_DIR := include $(SRC_DIR)/include
 
+
 # Source files (excluding main.c)
 SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
+INCLUDE_FILES := $($(INCLUDE_DIR)/%.h)
+
 
 # Object files
-OBJ_FILES := $(filter-out $(INCLUDE_DIR)/main.h, $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o))
+OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Compiler flags
 CFLAGS := -Wall -Wextra -Wpedantic -g -MMD -I$(INCLUDE_DIR) -std=c2x
@@ -25,12 +28,11 @@ EXECUTABLE := $(BIN_DIR)/gosi
 # Main target
 all: $(EXECUTABLE)
 
-# Rule to compile object files
-	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to link object files into executable
-$(EXECUTABLE): $(OBJ_FILES)
-	@$(CC) $(LDFLAGS) $^ -o $@
+$(EXECUTABLE): $(OBJ_FILES) |  $(INCLUDE_FILES)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+
 
 # Clean target
 clean:
