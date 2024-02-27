@@ -1,10 +1,10 @@
-#include "indirection.h"
 #include "table.h"
 
 #define INITIAL_CAPACITY 10
 
+
 // Function to initialize a hash table
-HashTable* Hashtable_init(){
+HashTable* Hashtable_init() {
     HashTable *table = (HashTable *)malloc(sizeof(HashTable));
     if (table == NULL) {
         // Handle memory allocation failure
@@ -26,7 +26,7 @@ HashTable* Hashtable_init(){
 }
 
 // Function to create a hash item
-HashItem* HashItem_create(int key, const char *value) {
+HashItem *HashItem_create(int key, const char *value) {
     HashItem *item = (HashItem *)malloc(sizeof(HashItem));
     if (item == NULL) {
         // Handle memory allocation failure
@@ -44,7 +44,7 @@ size_t HashTable_hash(int key, size_t capacity) {
 }
 
 // Function to insert a key-value pair into the hash table
-void HashTable_put(HashTable *table, int key, const char *value){
+void HashTable_put(HashTable *table, int key, const char *value) {
     // Compute the hash index for the key
     size_t index = HashTable_hash(key, table->capacity);
     // Create a new hash item
@@ -76,3 +76,4 @@ void HashTable_free(HashTable *table) {
         free(table);
     }
 }
+

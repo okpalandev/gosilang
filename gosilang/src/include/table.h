@@ -7,17 +7,16 @@
 typedef struct HashItem_s {
     int key;
     // Direct value of a token->value
-    //is an instance of string.
+    // is an instance of string.
     char *value;
 } HashItem;
 
 // A hash table.
-typedef  struct HashTable_s {
+typedef struct HashTable_s {
     int count;
     HashItem **slots;
     size_t capacity;
 } HashTable;
-
 
 HashTable* Hashtable_init();
 size_t HashTable_hash(int key, size_t capacity);
@@ -32,6 +31,7 @@ struct SymbolTable_s {
     char *name;
     TokenType* type;
     TokenValue* value;
-}
+};
 
 #endif // TABLE_H
+
