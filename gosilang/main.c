@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Initialize the tokenizer
-    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, 20);
+    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, 8);
 
     // Tokenize the input
     Token_t *token;
@@ -34,4 +34,5 @@ int main(int argc, char *argv[]) {
 
     fclose(fp);
     return 0;
+
 }
