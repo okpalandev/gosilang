@@ -5,7 +5,7 @@ CC := gcc
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
-INCLUDE_DIR := include $(SRC_DIR)/include
+INCLUDE_DIR :=  $(SRC_DIR)/include ./include
 
 # Source files (excluding main.c)
 SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
@@ -30,15 +30,15 @@ all: $(EXECUTABLE)
 
 # Rule to compile object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
-    $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to link object files into executable
 $(EXECUTABLE): $(OBJ_FILES)
-    $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 # Clean target
 clean:
-    @rm -f $(OBJ_DIR)/*.o $(EXECUTABLE)
+	@rm -f $(OBJ_DIR)/*.o $(EXECUTABLE)
 
 # Include dependency files
 -include $(OBJ_FILES:.o=.d)
