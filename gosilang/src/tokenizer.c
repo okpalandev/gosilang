@@ -28,13 +28,22 @@ Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value, size_t capacity)
 }
 
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
+    // Check if tokenizer or tokens are NULL
     if (tokenizer == NULL || tokenizer->tokens == NULL) {
-        fprintf(stderr,"Tokenizer or tokens in Tokenizer does not exist");
+        fprintf(stderr, "Tokenizer or tokens in Tokenizer does not exist");
         return;
     }
 
-    // Implement token advance logic here
+    // Iterate over tokens
+    for (int index = 0; index < tokenizer->capacity; index++) {
+        // Process each token (for example, print its type)
+        TokenType type = tokenizer->tokens[index]->type;
+        TokenValue value = tokenizer->tokens[index]->value;
+        Token_t current_token = {.type=type,.value = value};
+        memcpy(tokenizer->current_token,current_token,sizeof(current_token));
+    }
 }
+
 
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
     if (tokenizer == NULL) {

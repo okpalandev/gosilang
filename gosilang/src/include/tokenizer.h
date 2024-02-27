@@ -8,7 +8,6 @@ typedef struct Tokenizer_s Tokenizer_t;
 struct Tokenizer_s {
     Token_t **tokens;
     Token_t *current_token;
-
     char *stream;
     size_t capacity;
 
