@@ -3,6 +3,8 @@
 
 #include "indirection.h"
 #include "token.h"
+#include "tokens.h"
+
 
 typedef struct HashItem_s {
     int key;
@@ -31,7 +33,10 @@ struct SymbolTable_s {
     char *name;
     TokenType* type;
     TokenValue* value;
+    TokenKeywordType* kw_type;
 };
+
+
 
 #endif // TABLE_H
 
