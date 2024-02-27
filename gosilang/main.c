@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
     // Process or add tokens to the symbol table
         while (token != NULL) {
-        // Check if the token is the 'oru' keyword
+            // Check if the token is the 'oru' keyword
             if (token->type == TOKEN_KEYWORD && strcmp(token->value.data, "oru") == 0) {
             // Add 'oru' to the symbol table
             SymbolTable_add(table, "oru", token->type, token->value);
