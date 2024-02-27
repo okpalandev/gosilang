@@ -4,14 +4,14 @@
 #include "indirection.h"
 
 
-typedef struct HashItem_s HashItem_t;
-struct HashItem_s {
+typedef struct HashItem_s {
     int key;
     // Direct value of a token->value
     //is an instance of string.
     char *value;
 
-}
+} HashItem_t;
+
 // A hash table.
 typedef struct HashTable_s HashTable_t;
 struct HashTable_s {
@@ -21,8 +21,8 @@ struct HashTable_s {
 };
 
 HashTable_t* Hashtable_init();
-HashItem_t* HashTable_hash(HashItem_t* table, int key);
-HashTable_t* HashTable_put(HashTable_t* table,int key, char* value);
+size_t HashTable_hash(int key, size_t capacity);
+void HashTable_put(HashTable_t *table, int key, const char *value);
 HashItem_t *HashItem_create(int key, const char *value);
 void HashTable_free(HashTable_t* table);
 
@@ -30,4 +30,4 @@ void HashTable_free(HashTable_t* table);
 // using a two-pointer technique.
 
 
-#endif // SYMBOL_TABLE_H
+#endif // TABLE_H
