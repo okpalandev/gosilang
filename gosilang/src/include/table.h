@@ -2,6 +2,7 @@
 #define TABLE_H
 
 #include "indirection.h"
+#include "token.h"
 
 typedef struct HashItem_s {
     int key;
@@ -30,8 +31,8 @@ void HashTable_free(HashTable_t* table);
 typedef struct SymbolTable_s SymbolTable_t;
 struct SymbolTable_s {
     char *name;
-    TokenType type;
-    TokenValue value;
+    TokenType* type;
+    TokenValue* value;
 }
 
 #endif // TABLE_H
