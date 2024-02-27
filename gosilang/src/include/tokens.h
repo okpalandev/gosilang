@@ -3,5 +3,14 @@
 
 #include "token.h"
 
+type(TokenKeywordType,
+    KW_IF,
+    KW_ELSE_IF,
+    KW_ELSE,
+
+    KW_WHILE,
+
+)
+
 
 #endif // TOKENS_H
