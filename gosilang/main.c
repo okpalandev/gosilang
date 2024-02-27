@@ -4,7 +4,7 @@
 
 int main() {
     // Initialize the tokenizer
-    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, 100);
+    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, 1000);
 
     // Read input from the user or from a file
     char input[1000]; // Adjust the size according to your needs
