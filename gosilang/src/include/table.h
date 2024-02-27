@@ -26,16 +26,27 @@ HashItem* HashItem_create(int key, const char *value);
 void HashTable_put(HashTable *table, int key, const char *value);
 void HashTable_free(HashTable* table);
 
+typedef struct SymbolEntry_s {
+     char *name;
+     TokenType* type;
+    TokenValue* value;
+    TokenKeywordValue* kw_value;
+
+} SymbolEntry;
+
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
 // using a two-pointer technique.
-typedef struct SymbolTable_s SymbolTable_t;
+typedef struct SymbolTable_s SymbolTable;
 struct SymbolTable_s {
-    char *name;
-    TokenType* type;
-    TokenValue* value;
-    TokenKeywordType* kw_type;
+    int size;
+    int capacity;
+    SymbolEntry *entries;
 };
 
+SymbolTable* SymbolTable_init(int capacity);
+void SymbolTable_add(SymbolTable *table, const char *name, SymbolType type, TokenValue value);
+SymbolEntry* SymbolTable_get(SymbolTable *table, const char *name);
+void SymbolTable_free(SymbolTable *table);
 
 
 #endif // TABLE_H
