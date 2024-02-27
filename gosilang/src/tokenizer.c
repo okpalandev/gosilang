@@ -26,7 +26,6 @@ Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value, size_t capacity)
 
     return tokenizer;
 }
-
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
     // Check if tokenizer or tokens are NULL
     if (tokenizer == NULL || tokenizer->tokens == NULL) {
@@ -35,12 +34,26 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
     }
 
     // Iterate over tokens
-    for (int index = 0; index < tokenizer->capacity; index++) {
-        // Process each token (for example, print its type)
+    for (size_t index = 0; index < tokenizer->capacity; index++) {
         TokenType type = tokenizer->tokens[index]->type;
         TokenValue value = tokenizer->tokens[index]->value;
-        Token_t current_token = {.type=type,.value = value};
-        memcpy(tokenizer->current_token,current_token,sizeof(current_token));
+
+        // Allocate memory for the current token
+        Token_t *current_token = malloc(sizeof(Token_t));
+        if (current_token == NULL) {
+            fprintf(stderr, "Failed to allocate memory for current_token");
+            return;
+        }
+
+        // Assign values to the current token
+        current_token->type = type;
+        current_token->value = value;
+        current_token->len = strlen(value.data) + 1;
+
+        // printf("Type: %d, Value: %s, Length: %d\n", current_token->type, current_token->value.data, current_token->len);
+
+        // Free the memory allocated for the current token
+        Token_free(current_token);
     }
 }
 
