@@ -5,10 +5,10 @@ CC := gcc
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
-INCLUDE_DIR :=  $(SRC_DIR)/include ./include
+INCLUDE_DIR :=  $(SRC_DIR)/include
 
 # Source files (excluding main.c)
-SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
+SRC_FILES :=  $(wildcard $(SRC_DIR)/*.c)
 
 # Header files
 HEADER_FILES := $(wildcard $(INCLUDE_DIR)/*.h) $(wildcard $(INCLUDE_DIR)/**/*.h)
@@ -27,13 +27,14 @@ EXECUTABLE := $(BIN_DIR)/gosi
 
 # Main target
 all: $(EXECUTABLE)
+	$(CC) $(OBJ_DIR)/%.o
 
 # Rule to compile object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to link object files into executable
-$(EXECUTABLE): $(OBJ_FILES)
+$(EXECUTABLE): $(OBJ_FILES) | $(INCLUDE_FILES)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 # Clean target
