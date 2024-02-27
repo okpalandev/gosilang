@@ -4,7 +4,6 @@
 #include "token.h"
 #include "table.h"
 
-
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
@@ -17,7 +16,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, 8);
+    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, sizeof(uint_t));
     if (tokenizer == NULL) {
         fprintf(stderr, "Failed to initialize tokenizer\n");
         fclose(fp);
@@ -28,7 +27,7 @@ int main(int argc, char *argv[]) {
     SymbolTable *table = SymbolTable_init(10);
 
     Token_t *token;
-    char input[1000];
+    char input[256];
     while (fgets(input, sizeof(input), fp) != NULL) {
         // Tokenize the input
         token = tokenize(tokenizer, input);
@@ -44,15 +43,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Retrieve and print some symbols from the table (just for demonstration)
-    SymbolEntry *entry = SymbolTable_get(table, "symbol1");
-    if (entry != NULL) {
-        printf("Symbol name: %s\n", entry->name);
-        printf("Symbol type: %d\n", entry->type);
-        printf("Symbol value: %s\n", entry->value.data);
-    }
 
-    // Free memory
     Tokenizer_free(tokenizer);
     SymbolTable_free(table);
     fclose(fp);
