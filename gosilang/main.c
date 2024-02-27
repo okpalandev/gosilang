@@ -1,10 +1,11 @@
-#include "indirection.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "tokenizer.h"
 #include "token.h"
 
 int main() {
     // Initialize the tokenizer
-    Tokenizer_t *tokenizer = Tokenizer_init(/* provide necessary parameters */);
+    Tokenizer_t *tokenizer = Tokenizer_init();
 
     // Read input from the user or from a file
     char input[1000]; // Adjust the size according to your needs

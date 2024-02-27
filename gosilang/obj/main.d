@@ -1,2 +1,2 @@
-obj/main.o: main.c src/include/indirection.h src/include/tokenizer.h \
- src/include/indirection.h src/include/token.h src/include/token.h
+obj/main.o: main.c src/include/tokenizer.h src/include/indirection.h \
+ src/include/token.h src/include/token.h
