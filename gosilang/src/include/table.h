@@ -3,7 +3,7 @@
 
 #include "indirection.h"
 
-//A hash table.
+//A hash table to has vp
 
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
 // using a two-pointer technique.
