@@ -77,3 +77,66 @@ void HashTable_free(HashTable *table) {
     }
 }
 
+SymbolTable* SymbolTable_init(int capacity) {
+    SymbolTable *table = (SymbolTable *)malloc(sizeof(SymbolTable));
+    if (table == NULL) {
+        fprintf(stderr, "Failed to allocate memory for SymbolTable");
+        return NULL;
+    }
+
+    table->size = 0;
+    table->capacity = capacity;
+    table->entries = (SymbolEntry *)malloc(capacity * sizeof(SymbolEntry));
+    if (table->entries == NULL) {
+        fprintf(stderr, "Failed to allocate memory for SymbolTable entries");
+        free(table);
+        return NULL;
+    }
+
+    return table;
+}
+
+void SymbolTable_add(SymbolTable *table, const char *name, TokenType type, TokenValue value) {
+    if (table == NULL) {
+        fprintf(stderr, "SymbolTable is not initialized");
+        return;
+    }
+
+    if (table->size >= table->capacity) {
+        fprintf(stderr, "SymbolTable is full, cannot add more entries");
+        return;
+    }
+
+    SymbolEntry *entry = &(table->entries[table->size]);
+    entry->name = strdup(name);
+    entry->type = type;
+    entry->value = value;
+    table->size++;
+}
+
+SymbolEntry* SymbolTable_get(SymbolTable *table, const char *name) {
+    if (table == NULL) {
+        fprintf(stderr, "SymbolTable is not initialized");
+        return NULL;
+    }
+
+    for (int i = 0; i < table->size; i++) {
+        if (strcmp(table->entries[i].name, name) == 0) {
+            return &(table->entries[i]);
+        }
+    }
+
+    return NULL; // Entry not found
+}
+
+void SymbolTable_free(SymbolTable *table) {
+    if (table != NULL) {
+        for (int i = 0; i < table->size; i++) {
+            free(table->entries[i].name);
+        }
+        free(table->entries);
+        free(table);
+    }
+}
+
+
