@@ -50,8 +50,6 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
             }
         }
 
-        // Optionally, update column position if needed
-        // tokenizer->token_position.col = ..
 
     }
 }
@@ -74,6 +72,8 @@ Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
 
     return NULL; // Placeholder return value
 }
+
+
 
 void Tokenizer_free(Tokenizer_t *tokenizer) {
     if (tokenizer != NULL) {
