@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, sizeof(uint_t));
+    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, sizeof(uint8_t));
     if (tokenizer == NULL) {
         fprintf(stderr, "Failed to initialize tokenizer\n");
         fclose(fp);
