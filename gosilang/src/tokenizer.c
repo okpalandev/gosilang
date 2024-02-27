@@ -26,7 +26,8 @@ Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value) {
 }
 
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
-    strcpy(tokenizer->value->data, );
+
+
 }
 
 Token_t *tokenize(char *stream) {
@@ -39,6 +40,7 @@ Token_t *tokenize(char *stream) {
     }
     return NULL; // Placeholder return value
 }
+
 
 void Tokenizer_free(Tokenizer_t *tokenizer) {
     if (tokenizer != NULL) {
