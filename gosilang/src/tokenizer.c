@@ -74,7 +74,6 @@ Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
 }
 
 
-
 void Tokenizer_free(Tokenizer_t *tokenizer) {
     if (tokenizer != NULL) {
         free(tokenizer->tokens);
