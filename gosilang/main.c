@@ -19,7 +19,7 @@ int main() {
     if (tokens != NULL) {
         printf("Tokens:\n");
         for (int i = 0; tokens[i] != NULL; i++) {
-            printf("Type: %d, Value: %s\n", tokens[i]->type, tokens[i]->value);
+            printf("Type: %d, Value: %s\n", tokens[i]->type, tokens[i]->value.data);
         }
     }
 
