@@ -1,3 +1,4 @@
+#include "indirection.h"
 
 #define INITIAL_CAPACITY 10
 
