@@ -17,11 +17,12 @@ typedef  struct HashTable_s {
     HashItem **slots;
     size_t capacity;
 } HashTable;
-}
+
+
 HashTable* Hashtable_init();
 size_t HashTable_hash(int key, size_t capacity);
+HashItem* HashItem_create(int key, const char *value);
 void HashTable_put(HashTable *table, int key, const char *value);
-HashItem* *HashItem_create(int key, const char *value);
 void HashTable_free(HashTable* table);
 
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.

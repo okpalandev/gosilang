@@ -4,8 +4,8 @@
 #define INITIAL_CAPACITY 10
 
 // Function to initialize a hash table
-HashTable_t* Hashtable_init(){
-    HashTable_t *table = (HashTable_t *)malloc(sizeof(HashTable_t));
+HashTable* Hashtable_init(){
+    HashTable *table = (HashTable *)malloc(sizeof(HashTable));
     if (table == NULL) {
         // Handle memory allocation failure
         return NULL;
@@ -17,6 +17,7 @@ HashTable_t* Hashtable_init(){
         free(table);
         return NULL;
     }
+
     // Initialize all slots to NULL
     for (size_t i = 0; i < table->capacity; i++) {
         table->slots[i] = NULL;
@@ -25,7 +26,7 @@ HashTable_t* Hashtable_init(){
 }
 
 // Function to create a hash item
-HashItem *HashItem_create(int key, const char *value) {
+HashItem* HashItem_create(int key, const char *value) {
     HashItem *item = (HashItem *)malloc(sizeof(HashItem));
     if (item == NULL) {
         // Handle memory allocation failure
@@ -43,7 +44,7 @@ size_t HashTable_hash(int key, size_t capacity) {
 }
 
 // Function to insert a key-value pair into the hash table
-void HashTable_put(HashTable_t *table, int key, const char *value) {
+void HashTable_put(HashTable *table, int key, const char *value){
     // Compute the hash index for the key
     size_t index = HashTable_hash(key, table->capacity);
     // Create a new hash item
@@ -62,7 +63,7 @@ void HashTable_put(HashTable_t *table, int key, const char *value) {
 }
 
 // Function to free memory allocated for a hash table
-void HashTable_free(HashTable_t *table) {
+void HashTable_free(HashTable *table) {
     if (table != NULL) {
         // Free each hash item and its value
         for (size_t i = 0; i < table->capacity; i++) {
