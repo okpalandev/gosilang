@@ -28,9 +28,15 @@ EXECUTABLE := $(BIN_DIR)/gosi
 # Main target
 all: $(EXECUTABLE)
 
-# Rule to link object files into executable
-$(EXECUTABLE): $(OBJ_FILES) | $(INCLUDE_FILES)
+# Rule to compile main.c into an object file
+$(OBJ_DIR)/main.o:  main.c | $(OBJ_FILES) $(HEADER_FILES)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Update the dependency of $(EXECUTABLE) to include main.o
+$(EXECUTABLE): $(OBJ_FILES) $(OBJ_DIR)/main.o | $(INCLUDE_FILES)
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+
+
 
 # Rule to compile object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
