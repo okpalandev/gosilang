@@ -26,12 +26,15 @@ Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value, size_t capacity)
 
     return tokenizer;
 }
+
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
     // Check if tokenizer or tokens are NULL
     if (tokenizer == NULL || tokenizer->tokens == NULL) {
         fprintf(stderr, "Tokenizer or tokens in Tokenizer does not exist");
         return;
     }
+
+    int line = 1; // Initialize line number
 
     // Iterate over tokens
     for (size_t index = 0; index < tokenizer->capacity; index++) {
@@ -50,14 +53,20 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
         current_token->value = value;
         current_token->len = strlen(value.data) + 1;
 
+        // Set the line of the token using token_position
+        tokenizer->token_position.row = line;
 
-        // printf("Type: %d, Value: %s, Length: %d\n", current_token->type, current_token->value.data, current_token->len);
+        // Update line number based on the content of the token (e.g., count newline characters)
+        for (size_t i = 0; i < current_token->len; i++) {
+            if (current_token->value.data[i] == '\n') {
+                line++;
+            }
+        }
 
         // Free the memory allocated for the current token
-        Token_free(current_token);
+        free(current_token);
     }
 }
-
 
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
     if (tokenizer == NULL) {
