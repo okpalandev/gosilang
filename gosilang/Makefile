@@ -1,5 +1,3 @@
-# Makefile for gosilang project
-
 # Compiler
 CC := gcc
 
@@ -7,9 +5,10 @@ CC := gcc
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
-INCLUDE_DIR := $(SRC_DIR)/include
+INCLUDE_DIR := include $(SRC_DIR)/include
+
 # Source files
-SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+SRC_FILES := $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/**/*.c)
 
 # Object files
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -42,3 +41,4 @@ clean:
 -include $(OBJ_FILES:.o=.d)
 
 .PHONY: all clean
+
