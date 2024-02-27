@@ -7,11 +7,11 @@ OBJ_DIR := obj
 BIN_DIR := bin
 INCLUDE_DIR := include $(SRC_DIR)/include
 
-
 # Source files (excluding main.c)
 SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c) $(wildcard $(SRC_DIR)/*.c)
-INCLUDE_FILES := $($(INCLUDE_DIR)/%.h)
 
+# Header files
+HEADER_FILES := $(wildcard $(INCLUDE_DIR)/*.h) $(wildcard $(INCLUDE_DIR)/**/*.h)
 
 # Object files
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -28,18 +28,21 @@ EXECUTABLE := $(BIN_DIR)/gosi
 # Main target
 all: $(EXECUTABLE)
 
+# Rule to compile object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
+    $(CC) $(CFLAGS) -c $< -o $@
 
 # Rule to link object files into executable
-$(EXECUTABLE): $(OBJ_FILES) |  $(INCLUDE_FILES)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
-
+$(EXECUTABLE): $(OBJ_FILES)
+    $(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 # Clean target
 clean:
-	@rm -f $(OBJ_DIR)/*.o $(EXECUTABLE)
+    @rm -f $(OBJ_DIR)/*.o $(EXECUTABLE)
 
 # Include dependency files
 -include $(OBJ_FILES:.o=.d)
 
 .PHONY: all clean
+
 
