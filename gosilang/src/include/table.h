@@ -23,6 +23,7 @@ struct HashTable_s {
 HashTable_t* Hashtable_init();
 HashItem_t* HashTable_hash(HashItem_t* table, int key);
 HashTable_t* HashTable_put(HashTable_t* table,int key, char* value);
+HashItem_t *HashItem_create(int key, const char *value);
 void HashTable_free(HashTable_t* table);
 
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
