@@ -50,6 +50,7 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
         current_token->value = value;
         current_token->len = strlen(value.data) + 1;
 
+
         // printf("Type: %d, Value: %s, Length: %d\n", current_token->type, current_token->value.data, current_token->len);
 
         // Free the memory allocated for the current token
