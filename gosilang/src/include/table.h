@@ -28,6 +28,11 @@ void HashTable_free(HashTable_t* table);
 
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
 // using a two-pointer technique.
-
+typedef struct SymbolTable_s SymbolTable_t;
+struct SymbolTable_s {
+    char *name;
+    TokenType type;
+    TokenValue value;
+}
 
 #endif // TABLE_H
