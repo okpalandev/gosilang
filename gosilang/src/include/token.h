@@ -24,8 +24,10 @@ type(TokenType,
     TOKEN_OPERATOR,
     TOKEN_PUNCTUATOR,
     TOKEN_INVALID,
+    TOKEN_UNIDENTIFIED,
     TOKEN_END
 )
+
 value(TokenValue,
     char* data;
 )

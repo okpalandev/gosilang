@@ -3,8 +3,5 @@
 
 #include "token.h"
 
-value(
-
-);
 
 #endif // TOKENS_H

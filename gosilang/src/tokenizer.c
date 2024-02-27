@@ -1,3 +1,4 @@
+#include "tokens.h"
 #include "tokenizer.h"
 #include "indirection.h"
 
@@ -49,7 +50,10 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
                 line++;
             }
         }
-
+        TokenType type = TOKEN_UNIDENTIFIED;
+        TokenValue val = { .data = NULL };
+        Token_t *token = Token_init(&type, &val); // Initialize token
+        tokenizer->tokens[index] = token;
 
     }
 }

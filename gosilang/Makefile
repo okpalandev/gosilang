@@ -43,7 +43,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 
-
 # Clean target
 clean:
 	@rm -f $(OBJ_DIR)/*.o $(EXECUTABLE)
