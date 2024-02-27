@@ -24,6 +24,7 @@ HashTable_t* Hashtable_init(HashTable_t* table);
 HashItem_t* HashTable_hash(HashItem_t* table, int key);
 HashTable_t* HashTable_put(HashTable_t* table,int key, char* value);
 void HashTable_free(HashTable_t* table);
+
 // A SymbolTable to lookup value given a MinHeap and MaxHeap.
 // using a two-pointer technique.
 

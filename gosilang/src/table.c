@@ -1,4 +1,5 @@
 #include "indirection.h"
+#include "table.h"
 
 #define INITIAL_CAPACITY 10
 

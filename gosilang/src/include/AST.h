@@ -6,6 +6,7 @@
 
 typedef struct ASTNode_s ASTNode;
 struct ASTNode_s {
+
 };
 
 typedef struct AST_s AST;
