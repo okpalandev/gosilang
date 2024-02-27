@@ -27,15 +27,16 @@ EXECUTABLE := $(BIN_DIR)/gosi
 
 # Main target
 all: $(EXECUTABLE)
-	$(CC) $(OBJ_DIR)/%.o
+
+# Rule to link object files into executable
+$(EXECUTABLE): $(OBJ_FILES) | $(INCLUDE_FILES)
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 # Rule to compile object files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Rule to link object files into executable
-$(EXECUTABLE): $(OBJ_FILES) | $(INCLUDE_FILES)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
+
 
 # Clean target
 clean:
