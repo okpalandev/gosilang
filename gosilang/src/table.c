@@ -12,7 +12,7 @@ HashTable_t* Hashtable_init(){
     }
     table->count = 0;
     table->capacity = INITIAL_CAPACITY;
-    table->slots = (HashItem_t **)malloc(table->capacity * sizeof(HashItem_t *));
+    table->slots = (HashItem **)malloc(table->capacity * sizeof(HashItem *));
     if (table->slots == NULL) {
         free(table);
         return NULL;
@@ -25,8 +25,8 @@ HashTable_t* Hashtable_init(){
 }
 
 // Function to create a hash item
-HashItem_t *HashItem_create(int key, const char *value) {
-    HashItem_t *item = (HashItem_t *)malloc(sizeof(HashItem_t));
+HashItem *HashItem_create(int key, const char *value) {
+    HashItem *item = (HashItem *)malloc(sizeof(HashItem));
     if (item == NULL) {
         // Handle memory allocation failure
         return NULL;
@@ -47,7 +47,7 @@ void HashTable_put(HashTable_t *table, int key, const char *value) {
     // Compute the hash index for the key
     size_t index = HashTable_hash(key, table->capacity);
     // Create a new hash item
-    HashItem_t *item = HashItem_create(key, value);
+    HashItem *item = HashItem_create(key, value);
     if (item == NULL) {
         // Handle memory allocation failure
         return;
