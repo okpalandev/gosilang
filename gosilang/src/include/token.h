@@ -2,6 +2,10 @@
 #define TOKEN_H
 
 #include "indirection.h"
+// To verify value correctness,it is given a type.
+// This module split type and value in two for easier
+// computation of a functional turing-machine defined
+// using the lambda calculus framework.
 
 #define type(name,...) \
     typedef enum name##t {  \
