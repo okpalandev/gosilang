@@ -5,7 +5,8 @@ INCLUDE_DIR := $(SRC_DIR)/include
 
 # Files
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
-OBJ_FILES := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
+OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 
 # Compiler and flags
 CC := gcc
