@@ -3,7 +3,6 @@
 
 #include "indirection.h"
 
-
 typedef struct HashItem_s {
     int key;
     // Direct value of a token->value
