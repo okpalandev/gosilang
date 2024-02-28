@@ -42,8 +42,10 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
         TokenType type = TOKEN_UNIDENTIFIED;
         TokenValue val = { .data = NULL };
         Token_t *token = Token_init(&val); // Initialize token
+        token->line =line;
         tokenizer->tokens[index] = token;
     }
+
 }
 
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
