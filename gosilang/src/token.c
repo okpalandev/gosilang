@@ -2,7 +2,7 @@
 #include "token.h"
 
 Token_t* Token_init(TokenType *type, TokenValue *value) {
-    Token_t *token = malloc(sizeof(Token_t));
+     Token_t *token = malloc(sizeof(Token_t));
     if (token == NULL) {
         fprintf(stderr, "Failed to allocate memory for Token");
         return NULL;
@@ -15,6 +15,7 @@ Token_t* Token_init(TokenType *type, TokenValue *value) {
         // Handle the case when type pointer is NULL;
         token->type = TOKEN_INVALID; // set to a default value.
     }
+
 
     if (value != NULL) {
         // Allocate memory for token->value and token->value->data
