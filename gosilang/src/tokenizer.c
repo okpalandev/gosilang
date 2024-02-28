@@ -18,9 +18,20 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
         return NULL;
     }
 
-    // Initialize tokens (assuming capacity is provided as a parameter)
+    // Initialize each token
     for (size_t i = 0; i < capacity; i++) {
-        tokenizer->tokens[i] = NULL; // Initialize each token to NULL
+        tokenizer->tokens[i] = Token_init(NULL, NULL); // Initialize each token
+        if (tokenizer->tokens[i] == NULL) {
+            // Handle initialization failure
+            fprintf(stderr, "Failed to initialize token");
+            // Clean up allocated memory
+            for (size_t j = 0; j < i; j++) {
+                Token_free(tokenizer->tokens[j]);
+            }
+            free(tokenizer->tokens);
+            free(tokenizer);
+            return NULL;
+        }
     }
 
     tokenizer->capacity = capacity; // Set the capacity

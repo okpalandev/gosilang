@@ -8,7 +8,13 @@ Token_t* Token_init(TokenType *type, TokenValue *value) {
         return NULL;
     }
 
-    token->type = TOKEN_UNIDENTIFIED; // Initialize type
+    if (!type || type == NULL) {
+    // If type is NULL, set it to TOKEN_UNIDENTIFIED
+    type = (TokenType *)TOKEN_UNIDENTIFIED;
+} else {
+    // Otherwise, assign the provided type to token->type
+    token->type = type;
+}
 
     if (value != NULL && value->data != NULL) {
         token->value = malloc(sizeof(TokenValue)); // Allocate memory for token->value
