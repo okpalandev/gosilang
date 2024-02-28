@@ -21,7 +21,7 @@ Token_t* Token_init(TokenType *type, TokenValue *value) {
         if (token->value == NULL) {
             fprintf(stderr, "Failed to allocate memory for Token value");
             free(token); // Free allocated memory for token
-            return NULL;
+            return 0;
         }
         token->value->data = malloc(strlen(value->data) + 1); // Allocate memory for data
         if (token->value->data == NULL) {

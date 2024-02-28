@@ -11,16 +11,16 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
 
     tokenizer->stream = NULL; // Initialize stream to NULL
 
-    tokenizer->tokens = malloc(capacity * sizeof(Token_t)); // Allocate memory for tokens
-    if (tokenizer->tokens == NULL) {
-        fprintf(stderr, "Failed to allocate memory for tokens");
-        free(tokenizer);
-        return NULL;
-    }
+    // tokenizer->tokens = malloc(capacity * sizeof(Token_t)); // Allocate memory for tokens
+    // if (tokenizer->tokens == NULL) {
+    //     fprintf(stderr, "Failed to allocate memory for tokens");
+    //     free(tokenizer);
+    //     return NULL;
+    // }
 
     // Initialize each token
     for (size_t i = 0; i < capacity; i++) {
-        tokenizer->tokens[i] = Token_init(NULL, NULL); // Initialize each token
+        tokenizer->tokens[i] = Token_init(TOKEN_UNIDENTIFIED, NULL);
         if (tokenizer->tokens[i] == NULL) {
             // Handle initialization failure
             fprintf(stderr, "Failed to initialize token");
@@ -41,8 +41,8 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
 
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
     // Check if tokenizer or tokens are NULL
-    if (tokenizer == NULL || tokenizer->tokens == NULL) {
-        fprintf(stderr, "Tokenizer or tokens in Tokenizer do not exist");
+    if (tokenizer == NULL) {
+        fprintf(stderr, "Tokenizer  do not exist");
         return;
     }
 
@@ -72,10 +72,10 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
 }
 
 
-Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
+void tokenize(Tokenizer_t *tokenizer, char *stream) {
     if (tokenizer == NULL) {
         fprintf(stderr, "Tokenizer is not initialized");
-        return NULL;
+        return;
     }
 
     char *token = strtok(stream, " ");
@@ -88,7 +88,6 @@ Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
         token = strtok(NULL, " ");
     }
 
-    return NULL; // Placeholder return value
 }
 
 
