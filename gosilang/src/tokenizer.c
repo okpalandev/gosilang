@@ -41,12 +41,25 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
     for (size_t index = 0; index < tokenizer->capacity; index++) {
         TokenType type = TOKEN_UNIDENTIFIED;
         TokenValue val = { .data = NULL };
-        Token_t *token = Token_init(&val); // Initialize token
-        token->line =line;
+        Token_t *token = Token_init(&type, &val); // Initialize token
         tokenizer->tokens[index] = token;
-    }
 
+        // Set the line number of the token
+        token->line = line;
+
+        // Update line number based on the content of the token (e.g., count newline characters)
+        if (tokenizer->tokens[index]->value.data != NULL) {
+            char *data = tokenizer->tokens[index]->value.data;
+            while (*data != '\0') {
+                if (*data == '\n' || '\r' || '\t') {
+                    line++;
+                }
+                data++;
+            }
+        }
+    }
 }
+
 
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
     if (tokenizer == NULL) {
