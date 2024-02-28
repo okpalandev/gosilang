@@ -48,8 +48,8 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
         token->line = line;
 
         // Update line number based on the content of the token (e.g., count newline characters)
-        if (tokenizer->tokens[index]->value.data != NULL) {
-            char *data = tokenizer->tokens[index]->value.data;
+        if (tokenizer->tokens[index]->value->data != NULL) {
+            char *data = tokenizer->tokens[index]->value->data;
             while (*data != '\0') {
                 if (*data == '\n' || '\r' || '\t') {
                     line++;

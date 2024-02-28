@@ -1,7 +1,7 @@
 #include "indirection.h"
 #include "token.h"
 
-Token_t* Token_init(TokenValue *value) {
+Token_t* Token_init(TokenType *type,TokenValue *value) {
     Token_t *token = malloc(sizeof(Token_t));
     if (token == NULL) {
         fprintf(stderr, "Failed to allocate memory for Token");
@@ -9,7 +9,8 @@ Token_t* Token_init(TokenValue *value) {
     }
 
     // Initialize the type to a default value
-    token->type = TOKEN_UNIDENTIFIED;
+
+    if(type == NULL) token->type = TOKEN_UNIDENTIFIED;
 
     // Initialize the value if the parameter
     // is not NULL

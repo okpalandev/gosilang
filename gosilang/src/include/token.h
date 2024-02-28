@@ -40,7 +40,7 @@ struct Token_s {
     int line;
 };
 
-Token_t *Token_init(TokenValue *value);
+Token_t* Token_init(TokenType *type,TokenValue *value);
 void Token_free(Token_t* token);
 
 #endif // TOKEN_H
