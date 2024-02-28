@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    Tokenizer_t *tokenizer = Tokenizer_init(NULL, NULL, sizeof(uint8_t));
+    // Initialize tokenizer with a capacity (adjust the capacity as needed)
+    Tokenizer_t *tokenizer = Tokenizer_init(100);
     if (tokenizer == NULL) {
         fprintf(stderr, "Failed to initialize tokenizer\n");
         fclose(fp);
@@ -44,10 +45,13 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Free memory and close file
     Tokenizer_free(tokenizer);
     SymbolTable_free(table);
     fclose(fp);
 
     return 0;
 }
+
+
 
