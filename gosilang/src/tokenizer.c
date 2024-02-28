@@ -39,7 +39,7 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
 
     // Iterate over tokens
     for (size_t index = 0; index < tokenizer->capacity; index++) {
-        TokenValue value = tokenizer->tokens[index]->value;
+        TokenValue value = *(tokenizer->tokens[index]->value);
 
         // Set the line of the token using token_position
         tokenizer->token_position.row = line;
@@ -50,6 +50,7 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
                 line++;
             }
         }
+
         TokenType type = TOKEN_UNIDENTIFIED;
         TokenValue val = { .data = NULL };
         Token_t *token = Token_init(&type, &val); // Initialize token
@@ -70,12 +71,14 @@ Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
     // Using Tokenizer_advance, tokenize the stream with tokens
     while (token) {
         // Store the token somewhere, e.g., in tokenizer->tokens
+        // Assuming Tokenizer_advance updates tokenizer->tokens appropriately
         Tokenizer_advance(tokenizer); // Advance to the next token
         token = strtok(NULL, " ");
     }
 
     return NULL; // Placeholder return value
 }
+
 
 
 void Tokenizer_free(Tokenizer_t *tokenizer) {

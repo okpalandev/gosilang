@@ -96,7 +96,7 @@ SymbolTable* SymbolTable_init(int capacity) {
     return table;
 }
 
-void SymbolTable_add(SymbolTable *table, const char *name, TokenType type, TokenValue value) {
+void SymbolTable_add(SymbolTable *table, const char *name, TokenType *type, TokenValue *value) {
     if (table == NULL) {
         fprintf(stderr, "SymbolTable is not initialized");
         return;
