@@ -31,8 +31,8 @@ void HashTable_free(HashTable* table);
 // using a two-pointer technique.
 typedef struct SymbolEntry_s {
     char *name;
-    TokenType type;
-    TokenValue value;
+    TokenType *type;
+    TokenValue *value;
     TokenKeywordValue kw_value;
 } SymbolEntry;
 
@@ -43,7 +43,7 @@ typedef struct SymbolTable_s {
 } SymbolTable;
 
 SymbolTable* SymbolTable_init(int capacity);
-void SymbolTable_add(SymbolTable *table, const char *name, TokenType type, TokenValue value);
+void SymbolTable_add(SymbolTable *table, const char *name, TokenType *type, TokenValue *value);
 SymbolEntry* SymbolTable_get(SymbolTable *table, const char *name);
 void SymbolTable_free(SymbolTable *table);
 
