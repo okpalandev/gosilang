@@ -1,6 +1,7 @@
+#include "indirection.h"
 #include "tokenizer.h"
-#include "token.h"
 #include "table.h"
+
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -25,23 +26,26 @@ int main(int argc, char *argv[]) {
     // Create a SymbolTable with a capacity of 10
     SymbolTable *table = SymbolTable_init(10);
 
-    Token_t *token;
     char input[1000];
-    // Inside your main function where you tokenize the input
-    while (fgets(input, sizeof(input), fp) != NULL) {
-        // Tokenize the input
-        token = tokenize(tokenizer, input);
+    Token_t *token;
 
-        // Process or add tokens to the symbol table
-        while (token != NULL) {
-            // Check if the token is the 'oru' keyword
+    // Tokenize each line separately
+    while (fgets(input, sizeof(input), fp) != NULL) {
+        // Tokenize the input line
+        tokenize(tokenizer, input);
+
+        // Process tokens
+        for (size_t i = 0; i < tokenizer->capacity; i++) {
+            token = tokenizer->tokens[i];
+            // Check if token is NULL (end of line)
+            if (token == NULL) {
+                break;
+            }
+            // Process or add tokens to the symbol table
+            // Example: check for 'oru' keyword and add to symbol table
             if (token->type == TOKEN_KEYWORD && strcmp(token->value->data, "oru") == 0) {
-                // Add 'oru' to the symbol table
                 SymbolTable_add(table, "oru", token->type, token->value);
             }
-
-            // Tokenize the next input line
-            token = tokenize(tokenizer, NULL);
         }
     }
 

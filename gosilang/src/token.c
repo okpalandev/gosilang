@@ -7,28 +7,20 @@ Token_t* Token_init(TokenType *type, TokenValue *value) {
         fprintf(stderr, "Failed to allocate memory for Token");
         return NULL;
     }
-
-    if (!type || type == NULL) {
-    // If type is NULL, set it to TOKEN_UNIDENTIFIED
-    type = (TokenType *)TOKEN_UNIDENTIFIED;
-} else {
-    // Otherwise, assign the provided type to token->type
     token->type = type;
-}
 
     if (value != NULL && value->data != NULL) {
         token->value = malloc(sizeof(TokenValue)); // Allocate memory for token->value
         if (token->value == NULL) {
             fprintf(stderr, "Failed to allocate memory for Token value");
-            free(token); // Free allocated memory for token
+            Token_free(token);
             return 0;
         }
         token->value->data = malloc(strlen(value->data) + 1); // Allocate memory for data
         if (token->value->data == NULL) {
             fprintf(stderr, "Failed to allocate memory for Token value data");
-            free(token->value); // Free allocated memory for token->value
-            free(token); // Free allocated memory for token
-            return NULL;
+            Token_free(token);
+
         }
         strcpy(token->value->data, value->data);
     } else {

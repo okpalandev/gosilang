@@ -11,13 +11,6 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
 
     tokenizer->stream = NULL; // Initialize stream to NULL
 
-    // tokenizer->tokens = malloc(capacity * sizeof(Token_t)); // Allocate memory for tokens
-    // if (tokenizer->tokens == NULL) {
-    //     fprintf(stderr, "Failed to allocate memory for tokens");
-    //     free(tokenizer);
-    //     return NULL;
-    // }
-
     // Initialize each token
     for (size_t i = 0; i < capacity; i++) {
         tokenizer->tokens[i] = Token_init(TOKEN_UNIDENTIFIED, NULL);
@@ -28,8 +21,7 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
             for (size_t j = 0; j < i; j++) {
                 Token_free(tokenizer->tokens[j]);
             }
-            free(tokenizer->tokens);
-            free(tokenizer);
+            Tokenizer_free(tokenizer);
             return NULL;
         }
     }
@@ -94,7 +86,11 @@ void tokenize(Tokenizer_t *tokenizer, char *stream) {
 
 void Tokenizer_free(Tokenizer_t *tokenizer) {
     if (tokenizer != NULL) {
-        free(tokenizer->tokens);
+        // Free tokens individually
+        for (size_t i = 0; i < tokenizer->capacity; i++) {
+            Token_free(tokenizer->tokens[i]);
+        }
+        // Free dynamically allocated memory
         free(tokenizer->stream);
         free(tokenizer);
     }
