@@ -1,36 +1,32 @@
 #include "indirection.h"
 #include "token.h"
 
-
-// Function to initialize a token
 Token_t* Token_init(TokenType *type, TokenValue *value) {
-    // Allocate memory for the token
-    Token_t *token = (Token_t*)malloc(sizeof(Token_t));
+    Token_t *token = malloc(sizeof(Token_t));
     if (token == NULL) {
         fprintf(stderr, "Failed to allocate memory for Token");
         return NULL;
     }
 
-    // Initialize type and value if pointers are not NULL
-    if (type != NULL) {
-        token->type = type;
-    } else {
-        token->type = TOKEN_UNIDENTIFIED;
-    }
+    token->type = TOKEN_UNIDENTIFIED; // Initialize type (or set to a default value)
 
-    if (value != NULL) {
-        // Allocate memory for value.data and copy the provided data
-        // token->value->data = malloc(strlen(value->data) + 1);
+    if (value != NULL && value->data != NULL) {
+        token->value = malloc(sizeof(TokenValue)); // Allocate memory for token->value
+        if (token->value == NULL) {
+            fprintf(stderr, "Failed to allocate memory for Token value");
+            free(token); // Free allocated memory for token
+            return NULL;
+        }
+        token->value->data = malloc(strlen(value->data) + 1); // Allocate memory for data
         if (token->value->data == NULL) {
             fprintf(stderr, "Failed to allocate memory for Token value data");
-            free(token);
+            free(token->value); // Free allocated memory for token->value
+            free(token); // Free allocated memory for token
             return NULL;
         }
         strcpy(token->value->data, value->data);
     } else {
-        // Handle the case when value pointer is NULL
-        // For example, set token->value.data to an empty string
-        token->value->data = "";
+        token->value = NULL; // Set token->value to NULL if value is NULL or value->data is NULL
     }
 
     return token;
