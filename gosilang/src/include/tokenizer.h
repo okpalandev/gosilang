@@ -19,7 +19,7 @@ struct Tokenizer_s {
 
 };
 
-Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value,size_t capacity);
+Tokenizer_t *Tokenizer_init(size_t capacity);
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream);
 void Tokenizer_free(Tokenizer_t *tokenizer);
 

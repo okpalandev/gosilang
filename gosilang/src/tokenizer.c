@@ -2,8 +2,8 @@
 #include "tokenizer.h"
 #include "indirection.h"
 
-Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value, size_t capacity) {
-    Tokenizer_t *tokenizer = (Tokenizer_t *)malloc(sizeof(Tokenizer_t));
+Tokenizer_t *Tokenizer_init(size_t capacity) {
+    Tokenizer_t *tokenizer = malloc(sizeof(Tokenizer_t));
     if (tokenizer == NULL) {
         fprintf(stderr, "Failed to allocate memory for Tokenizer");
         return NULL;
@@ -20,7 +20,7 @@ Tokenizer_t *Tokenizer_init(TokenType *type, TokenValue *value, size_t capacity)
 
     // Initialize tokens (assuming capacity is provided as a parameter)
     for (size_t i = 0; i < capacity; i++) {
-        tokenizer->tokens[i] = Token_init(type, value);
+        tokenizer->tokens[i] = NULL; // Initialize each token to NULL
     }
 
     tokenizer->capacity = capacity; // Set the capacity
@@ -39,26 +39,12 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
 
     // Iterate over tokens
     for (size_t index = 0; index < tokenizer->capacity; index++) {
-        TokenValue value = *(tokenizer->tokens[index]->value);
-
-        // Set the line of the token using token_position
-        tokenizer->token_position.row = line;
-
-        // Update line number based on the content of the token (e.g., count newline characters)
-        for (size_t i = 0; i < strlen(value.data); i++) {
-            if (value.data[i] == '\n') {
-                line++;
-            }
-        }
-
         TokenType type = TOKEN_UNIDENTIFIED;
         TokenValue val = { .data = NULL };
-        Token_t *token = Token_init(&type, &val); // Initialize token
+        Token_t *token = Token_init(&val); // Initialize token
         tokenizer->tokens[index] = token;
-
     }
 }
-
 
 Token_t *tokenize(Tokenizer_t *tokenizer, char *stream) {
     if (tokenizer == NULL) {
