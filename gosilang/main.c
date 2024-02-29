@@ -1,7 +1,7 @@
 #include "indirection.h"
 #include "tokenizer.h"
 #include "table.h"
-
+#include "tokens.h" // Include tokens.h for TokenKeywordType and TokenKeywordValue
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -44,8 +44,12 @@ int main(int argc, char *argv[]) {
             // Process or add tokens to the symbol table
             // Example: check for 'oru' keyword and add to symbol table
             if (token->type == TOKEN_KEYWORD && strcmp(token->value->data, "oru") == 0) {
-                SymbolTable_add(table, "oru", token->type, token->value);
+                // Here, you would use TokenKeywordType and TokenKeywordValue
+                // Instead of directly accessing the data member of the token's value,
+                // you would access the info member of TokenKeywordValue if it contains additional data
+                SymbolTable_add(table, "oru", token->type, &token->value); // Corrected usage
             }
+
         }
     }
 
@@ -56,6 +60,3 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
-
-
-

@@ -30,7 +30,7 @@ type(TokenType,
 
 value(TokenValue,
     char* data;
-    char *trans
+    char *trans;
 )
 
 typedef struct Token_s Token_t;
