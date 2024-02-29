@@ -43,7 +43,7 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
     // Iterate over tokens
     for (size_t index = 0; index < tokenizer->capacity; index++) {
         TokenType type = TOKEN_UNIDENTIFIED;
-        TokenValue val = { .data = NULL };
+        TokenValue val = { .data = TOKEN_UNIDENTIFIED };
         Token_t *token = Token_init(&type, &val); // Initialize token
         tokenizer->tokens[index] = token;
 
@@ -54,7 +54,7 @@ void Tokenizer_advance(Tokenizer_t *tokenizer) {
         if (tokenizer->tokens[index]->value->data != NULL) {
             char *data = tokenizer->tokens[index]->value->data;
             while (*data != '\0') {
-                if (*data == '\n' || '\r' || '\t') {
+                if (*data == '\n') {
                     line++;
                 }
                 data++;

@@ -13,7 +13,7 @@ struct Tokenizer_s {
     } token_position;
     char *stream;
     size_t capacity;
-    Token_t *tokens[]; // Flexible array member moved to the end
+    Token_t *tokens[];
 };
 
 Tokenizer_t *Tokenizer_init(size_t capacity);
