@@ -7,17 +7,13 @@
 typedef struct Tokenizer_s Tokenizer_t;
 struct Tokenizer_s {
     Token_t *current_token;
-    // An effiecently way to compute
-    // the line of token given a row and a col.
     union {
         int row;
         int col;
     } token_position;
     char *stream;
     size_t capacity;
-    Token_t *tokens[];
-
-
+    Token_t *tokens[]; // Flexible array member moved to the end
 };
 
 Tokenizer_t *Tokenizer_init(size_t capacity);
