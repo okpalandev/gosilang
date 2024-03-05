@@ -60,6 +60,7 @@ clean:
 	rm -f $(OBJ_DIR)/*.o $(EXECUTABLE) unit_test integration_test acceptance_test
 
 # Include dependency files
--include $(OBJ_FILES:.o=.d)
+-include $(OBJ_FILES:.o=.d) $(UNIT_TEST_FILES:.c=.d) $(INTEGRATION_TEST_FILES:.c=.d) $(ACCEPTANCE_TEST_FILES:.c=.d)
+
 
 .PHONY: all clean unit_test integration_test acceptance_test

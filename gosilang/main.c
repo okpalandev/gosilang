@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 
         }
     }
-
+    
     // Free memory and close file
     Tokenizer_free(tokenizer);
     SymbolTable_free(table);
