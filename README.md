@@ -1,4 +1,4 @@
-# GosiLang - Gossip Language
+# GosiLang - Gossip Language.
 "Don’t ask what your country can do for you, but what you can do for your country."
 - Nnamdi Michael Okpala
 
