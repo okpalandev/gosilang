@@ -41,3 +41,13 @@ void Token_free(Token_t *token) {
         free(token);
     }
 }
+
+void Token_print(Token_t *token) {
+    if (token != NULL) {
+        if (token->value != NULL) {
+            printf(" - %s\n", token->value->data);
+        } else {
+            printf("\n");
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "indirection.h": "c",
+        "typeinfo": "c"
+    }
+}

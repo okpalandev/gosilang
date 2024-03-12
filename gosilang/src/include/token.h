@@ -30,7 +30,7 @@ type(TokenType,
 
 value(TokenValue,
     char* data;
-    char *trans;
+    char *name;
 )
 
 typedef struct Token_s Token_t;
@@ -43,6 +43,7 @@ struct Token_s {
 
 Token_t* Token_init(TokenType *type,TokenValue *value);
 void Token_free(Token_t* token);
+void Token_print(Token_t* token);
 
 #endif // TOKEN_H
 

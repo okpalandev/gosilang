@@ -1,7 +1,9 @@
 #include "indirection.h"
 #include "tokenizer.h"
 #include "table.h"
-#include "tokens.h" // Include tokens.h for TokenKeywordType and TokenKeywordValue
+#include "tokens.h"
+#include "token.h"
+
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -33,7 +35,7 @@ int main(int argc, char *argv[]) {
     while (fgets(input, sizeof(input), fp) != NULL) {
         // Tokenize the input line
         tokenize(tokenizer, input);
-
+        
         // Process tokens
         for (size_t i = 0; i < tokenizer->capacity; i++) {
             token = tokenizer->tokens[i];
@@ -41,13 +43,21 @@ int main(int argc, char *argv[]) {
             if (token == NULL) {
                 break;
             }
+
+
             // Process or add tokens to the symbol table
-            // Example: check for 'oru' keyword and add to symbol table
-            if (token->type == TOKEN_KEYWORD && strcmp(token->value->data, "oru") == 0) {
-                // Here, you would use TokenKeywordType and TokenKeywordValue
-                // Instead of directly accessing the data member of the token's value,
-                // you would access the info member of TokenKeywordValue if it contains additional data
-                SymbolTable_add(table, "oru", token->type, &token->value); // Corrected usage
+
+switch (*token->type) {
+                case TOKEN_KEYWORD:
+                    if (strcmp(token->value->data, "oru") == 0) {
+                        SymbolTable_add(table, "oru", token->type, token->value);
+                    }
+                    break;
+                case TOKEN_IDENTIFIER:
+                    SymbolTable_add(table, token->value->data, token->type, token->value);
+                    break;
+                default:
+                    break;
             }
 
         }
