@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
                     Tokenizer_free(tokenizer);
                     SymbolTable_free(table);
                     return 1;
-                } // <-- This brace was missing
+                } 
             }
 
             // Print token
