@@ -1,9 +1,9 @@
-#include "indirection.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "tokenizer.h"
 #include "table.h"
 #include "tokens.h"
 #include "token.h"
-
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -41,13 +41,22 @@ int main(int argc, char *argv[]) {
             token = tokenizer->tokens[i];
             // Check if token is NULL (end of line)
             if (token == NULL) {
-                break;
+                TokenType end_type = TOKEN_END;
+                token = Token_init(&end_type, NULL);
+                if (token == NULL) {
+                    fprintf(stderr, "Failed to initialize token\n");
+                    fclose(fp);
+                    Tokenizer_free(tokenizer);
+                    SymbolTable_free(table);
+                    return 1;
+                } // <-- This brace was missing
             }
 
-
+            // Print token
+            Token_print(token);
+            
             // Process or add tokens to the symbol table
-
-switch (*token->type) {
+            switch (*token->type) {
                 case TOKEN_KEYWORD:
                     if (strcmp(token->value->data, "oru") == 0) {
                         SymbolTable_add(table, "oru", token->type, token->value);
@@ -59,7 +68,6 @@ switch (*token->type) {
                 default:
                     break;
             }
-
         }
     }
     

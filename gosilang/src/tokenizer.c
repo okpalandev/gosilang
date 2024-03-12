@@ -30,38 +30,32 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
 
     return tokenizer;
 }
-
 void Tokenizer_advance(Tokenizer_t *tokenizer) {
-    // Check if tokenizer or tokens are NULL
     if (tokenizer == NULL) {
-        fprintf(stderr, "Tokenizer  do not exist");
+        fprintf(stderr, "Tokenizer does not exist");
         return;
     }
 
-    int line = 1; // Initialize line number
+    // Tokenize the stream
+    char *token = strtok(tokenizer->stream, " ");
+    size_t index = 0;
 
-    // Iterate over tokens
-    for (size_t index = 0; index < tokenizer->capacity; index++) {
-        TokenType type = TOKEN_UNIDENTIFIED;
-        TokenValue val = { .data = TOKEN_UNIDENTIFIED };
-        Token_t *token = Token_init(&type, &val); // Initialize token
-        tokenizer->tokens[index] = token;
-
-        // Set the line number of the token
-        token->line = line;
-
-        // Update line number based on the content of the token (e.g., count newline characters)
-        if (tokenizer->tokens[index]->value->data != NULL) {
-            char *data = tokenizer->tokens[index]->value->data;
-            while (*data != '\0') {
-                if (*data == '\n') {
-                    line++;
-                }
-                data++;
-            }
+    while (token != NULL && index < tokenizer->capacity) {
+        // Create a new token
+        Token_t *new_token = Token_init(TOKEN_UNIDENTIFIED, &(TokenValue){ .data = token });
+        if (new_token == NULL) {
+            fprintf(stderr, "Failed to initialize token");
+            return; // Abort tokenization if initialization fails
         }
+
+        // Store the token
+        tokenizer->tokens[index++] = new_token;
+
+        // Get the next token
+        token = strtok(NULL, " ");
     }
 }
+
 
 
 void tokenize(Tokenizer_t *tokenizer, char *stream) {
@@ -70,18 +64,12 @@ void tokenize(Tokenizer_t *tokenizer, char *stream) {
         return;
     }
 
-    char *token = strtok(stream, " ");
+    // Store the input stream
+    tokenizer->stream = strdup(stream);
 
-    // Using Tokenizer_advance, tokenize the stream with tokens
-    while (token) {
-        // Store the token somewhere, e.g., in tokenizer->tokens
-        // Assuming Tokenizer_advance updates tokenizer->tokens appropriately
-        Tokenizer_advance(tokenizer); // Advance to the next token
-        token = strtok(NULL, " ");
-    }
-
+    // Tokenize the stream
+    Tokenizer_advance(tokenizer);
 }
-
 
 
 void Tokenizer_free(Tokenizer_t *tokenizer) {
