@@ -10,7 +10,7 @@ Tokenizer_t *Tokenizer_init(size_t capacity) {
     }
 
     tokenizer->stream = NULL; // Initialize stream to NULL
-
+    
     // Initialize each token
     for (size_t i = 0; i < capacity; i++) {
         tokenizer->tokens[i] = Token_init(TOKEN_UNIDENTIFIED, NULL);
