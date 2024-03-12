@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
     char input[1000];
     Token_t *token;
-
+    
     // Tokenize each line separately
     while (fgets(input, sizeof(input), fp) != NULL) {
         // Tokenize the input line
