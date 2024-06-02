@@ -91,7 +91,7 @@ void Map_free(Map *map) {
         Map_free(map->next);
     }
     free(map);
-};
+}
 
 Map *Map_insert(Map *map, char *key, TokenValue *value) {
     Map *node = Map_new(key, value);
