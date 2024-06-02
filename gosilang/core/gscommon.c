@@ -16,10 +16,11 @@ void Token_free(Token *token) {
 }
 
 
-TokenValue *TokenValue_new(char *string, enum TokenType type) {
-    TokenValue *value = malloc(sizeof(TokenValue));
-    value->string = string;
-    return value;
+Token *TokenValue_new(char *string, enum TokenType type, TokenValue *value) {
+    Token *token = malloc(sizeof(Token));
+    token->type = type;
+    token->value =  value;
+    return token;
 }
 
 TokenValue *TokenValue_cast(char *string, enum TokenType type) {
