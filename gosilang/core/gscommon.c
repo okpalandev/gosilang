@@ -66,7 +66,16 @@ TokenTrie *TokenTrie_search(TokenTrie *trie, char *key) {
     return NULL;
 }
 
-
+const char *TokenTrie_strnode(TokenTrie *trie, char *key) {
+    TokenTrie *node = trie;
+    while (node) {
+        if (strcmp(node->key, key) == 0) {
+            return node->key;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
 
 
 Map *Map_new(char *key, TokenValue *value) {
