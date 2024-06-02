@@ -22,11 +22,12 @@ Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     return token;
 }
 
-TokenValue *TokenValue_cast( char *string, enum TokenType type){
+Token *TokenValue_cast(char *string, enum TokenType type, TokenValue *value) {
     TokenValue *value = malloc(sizeof(TokenValue));
     value->string = string;
-    return value;
+    return TokenValue_new(type, value);
 }
+
 
 void TokenValue_free(TokenValue *value) {
     free(value);
