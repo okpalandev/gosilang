@@ -69,7 +69,8 @@ Token *Token_new(enum TokenType type, TokenValue *value);
 void Token_free(Token *token);
 
 
-Token *TokenValue_new(char *string, enum TokenType type, TokenValue *value);
+
+Token *TokenValue_new( enum TokenType type, TokenValue *value);
 TokenValue *TokenValue_cast(char *string, enum TokenType type);
 void TokenValue_free(TokenValue *value);
 

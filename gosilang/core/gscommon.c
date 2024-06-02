@@ -16,7 +16,7 @@ void Token_free(Token *token) {
 }
 
 
-Token *TokenValue_new(char *string, enum TokenType type, TokenValue *value) {
+Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     Token *token = malloc(sizeof(Token));
     token->type = type;
     token->value =  value;
