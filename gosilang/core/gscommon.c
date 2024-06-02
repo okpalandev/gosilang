@@ -22,7 +22,7 @@ Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     return token;
 }
 
-TokenValue *TokenValue_cast(const char *string, enum TokenType type){
+TokenValue *TokenValue_cast( char *string, enum TokenType type){
     TokenValue *value = malloc(sizeof(TokenValue));
     value->string = string;
     return value;
