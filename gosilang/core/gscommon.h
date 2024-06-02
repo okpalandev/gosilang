@@ -75,7 +75,7 @@ TokenTrie *TokenTrie_new(char *key, enum TokenType type);
 void TokenTrie_free(TokenTrie *trie);
 TokenTrie *TokenTrie_insert(TokenTrie *trie, char *key, enum TokenType type);
 TokenTrie *TokenTrie_search(TokenTrie *trie, char *key);
-const char TokenTrie_str_join(TokenTrie *trie, const char *delim);
+const char *TokenTrie_strnode(TokenTrie *trie, char *key);
 
 Map *Map_new(char *key, TokenValue *value);
 void Map_free(Map *map);
