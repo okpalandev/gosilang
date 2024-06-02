@@ -15,7 +15,6 @@ void Token_free(Token *token) {
     free(token);
 }
 
-
 Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     Token *token = malloc(sizeof(Token));
     token->type = type;
@@ -109,6 +108,4 @@ TokenValue *Map_search(Map *map, char *key) {
         node = node->next;
     }
     return NULL;
-};
-
-
+}
