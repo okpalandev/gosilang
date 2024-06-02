@@ -7,8 +7,7 @@
 #include <string.h>
 #include <math.h>
 
-#define max(a,b) ((a>b)? a : b)
-#define min(a,b) ((a<b)? a : b)
+
 // To verify value correctness, it is given a type.
 // For compile time safety, we seperate the declarations
 // the tokens, and types.
@@ -57,13 +56,18 @@ union TokenValue {
     bool boolean;
 };
 
+Token *Token_new(enum TokenType type, TokenValue *value);
+void Token_free(Token *token);
+
+TokenValue *TokenValue_new(char *string, enum TokenType type);
+TokenValue *TokenValue_cast(char *string, enum TokenType type);
+void TokenValue_free(TokenValue *value);
+
+
 TokenTrie *TokenTrie_new(char *key, enum TokenType type);
 void TokenTrie_free(TokenTrie *trie);
 TokenTrie *TokenTrie_insert(TokenTrie *trie, char *key, enum TokenType type);
 TokenTrie *TokenTrie_search(TokenTrie *trie, char *key);
 
-Token *Token_new(enum TokenType type, TokenValue *value);
-void Token_free(Token *token);
-TokenValue *TokenValue_cast(char *string, enum TokenType type);
 
 #endif // GSCOMMON_H
