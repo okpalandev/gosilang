@@ -56,6 +56,14 @@ union TokenValue {
     bool boolean;
 };
 
+
+typedef struct Map_s Map;
+struct Map_s {
+    char *key;
+    TokenValue *value;
+    Map *next;
+};
+
 Token *Token_new(enum TokenType type, TokenValue *value);
 void Token_free(Token *token);
 
@@ -63,11 +71,17 @@ TokenValue *TokenValue_new(char *string, enum TokenType type);
 TokenValue *TokenValue_cast(char *string, enum TokenType type);
 void TokenValue_free(TokenValue *value);
 
-
 TokenTrie *TokenTrie_new(char *key, enum TokenType type);
 void TokenTrie_free(TokenTrie *trie);
 TokenTrie *TokenTrie_insert(TokenTrie *trie, char *key, enum TokenType type);
 TokenTrie *TokenTrie_search(TokenTrie *trie, char *key);
+
+Map *Map_new(char *key, TokenValue *value);
+void Map_free(Map *map);
+Map *Map_insert(Map *map, char *key, TokenValue *value);
+TokenValue *Map_search(Map *map, char *key);
+
+
 
 
 #endif // GSCOMMON_H

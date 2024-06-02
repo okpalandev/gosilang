@@ -66,3 +66,35 @@ TokenTrie *TokenTrie_search(TokenTrie *trie, char *key) {
     return NULL;
 }
 
+
+Map *Map_new(char *key, TokenValue *value) {
+    Map *map = malloc(sizeof(Map));
+    map->key = key;
+    map->value = value;
+    map->next = NULL;
+    return map;
+}
+
+void Map_free(Map *map) {
+    if (map->next) {
+        Map_free(map->next);
+    }
+    free(map);
+};
+
+Map *Map_insert(Map *map, char *key, TokenValue *value) {
+    Map *node = Map_new(key, value);
+    node->next = map;
+    return node;
+}
+
+TokenValue *Map_search(Map *map, char *key) {
+    Map *node = map;
+    while (node) {
+        if (strcmp(node->key, key) == 0) {
+            return node->value;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
