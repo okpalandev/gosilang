@@ -71,7 +71,7 @@ void Token_free(Token *token);
 
 
 Token *TokenValue_new( enum TokenType type, TokenValue *value);
-TokenValue *TokenValue_cast(char *string, enum TokenType type);
+Token *TokenValue_cast(char *string, enum TokenType type, TokenValue *value);
 void TokenValue_free(TokenValue *value);
 
 TokenTrie *TokenTrie_new(char *key, enum TokenType type);
