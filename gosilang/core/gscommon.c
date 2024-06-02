@@ -22,9 +22,9 @@ Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     return token;
 }
 
-Token *TokenValue_cast(char *string, enum TokenType type, TokenValue *value) {
+Token *TokenValue_cast(char *data, enum TokenType type, TokenValue *value) {
     TokenValue *value = malloc(sizeof(TokenValue));
-    value->string = string;
+    value->data = data;
     return TokenValue_new(type, value);
 }
 

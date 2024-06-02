@@ -51,10 +51,7 @@ struct Token_s {
 
 typedef union TokenValue TokenValue;
 union TokenValue {
-    char *string;
-    int integer;
-    double decimal;
-    bool boolean;
+    char *data;
 };
 
 
