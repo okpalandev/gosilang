@@ -12,6 +12,7 @@
 // For compile time safety, we seperate the declarations
 // the tokens, and types.
 enum TokenType {
+    TOKEN_UNKNOWN,
     TOKEN_COMMENT,
     TOKEN_KEYWORD,
     TOKEN_IDENTIFIER,

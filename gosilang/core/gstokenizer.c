@@ -16,3 +16,22 @@ void Tokenizer_free(Tokenizer *tokenizer) {
     free(tokenizer);
 }
 
+
+Token *Tokenizer_peek(Tokenizer *tokenizer) {
+    Token *token = Token_new(TOKEN_UNKNOWN, NULL);
+    return token;
+}
+Token *Tokenizer_advance(Tokenizer *tokenizer) {
+    Token *token = Token_new(TOKEN_UNKNOWN, NULL);
+    return token;
+}
+Token *Tokenizer_consume(Tokenizer *tokenizer, enum TokenType type) {
+    Token *token = Token_new(TOKEN_UNKNOWN, NULL);
+    return token;
+}
+
+Token *Tokenizer_next(Tokenizer *tokenizer) {
+    Token *token = Token_new(TOKEN_UNKNOWN, NULL);
+    return token;
+}
+
