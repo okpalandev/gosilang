@@ -4,9 +4,9 @@ CFLAGS := -I$(INCLUDE_DIR) -MMD -Wall -Wextra -Werror -g -O0 -std=c2x -Wpedantic
 LDFLAGS:= -lm
 
 # Directories
-SRC_DIR := core
-OBJ_DIR := /obj
-BIN_DIR := /bin
+SRC_DIR := .
+OBJ_DIR := obj
+BIN_DIR := bin
 INCLUDE_DIR := include
 
 # Source files
@@ -16,7 +16,7 @@ SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c)
 HEADER_FILES := $(wildcard $(INCLUDE_DIR)/**/*.h)
 
 # Object files
-OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ_FILES := $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
 
 ifeq ($(OS),Windows_NT)
 		MKDIR := @mkdir $(subst /,\,$(dir $@)) 2> NUL || exit 0	
@@ -34,15 +34,17 @@ endif
 all: $(EXECUTABLE)
 
 # Build rule
-$(EXECUTABLE): $(OBJ_FILES)
+$(EXECUTABLE): $(OBJ_FILES) $(SRC_DIR)/main.c | $(HEADER_FILES)
 	$(MKDIR) $(BIN_DIR)
 	@echo "Compiling" $(EXECUTABLE)
 	$(CC) $(OBJ_FILES) $(SRC_DIR)/main.c -o $@ $(LDFLAGS)
 
 # Compile rule
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER_FILES)
-	$(MKDIR) $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(HEADER_FILES)
+	$(MKDIR)  $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+
 
 
 # Clean target
@@ -54,6 +56,5 @@ else
 endif
 
 # Include dependency files
--include $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
-
+-include $(OBJ_FILES:.o=.d)
 .PHONY: all clean
