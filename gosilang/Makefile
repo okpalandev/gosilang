@@ -1,60 +1,35 @@
-# Makefile for GosiLang (Gossip Programming Language)
-CC := gcc
-CFLAGS := -I$(INCLUDE_DIR) -MMD -Wall -Wextra -Werror -g -O0 -std=c2x -Wpedantic
-LDFLAGS:= -lm
+# Variables
+CC = gcc
+CFLAGS = -I -MMD -Wall -Wextra -Werror -g -O0 -std=c2x -Wpedantic
+OBJDIR = obj
+SRCDIR = core
+TARGET = main
 
-# Directories
-SRC_DIR := .
-OBJ_DIR := obj
-BIN_DIR := bin
-INCLUDE_DIR := include
+# Source and object files
+SRCS = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 
-# Source files
-SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c)
+# Default target
+all: $(TARGET)
 
-# Header files
-HEADER_FILES := $(wildcard $(INCLUDE_DIR)/**/*.h)
+# Create obj directory if it doesn't exist
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-# Object files
-OBJ_FILES := $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
+# Rule to build the main target
+$(TARGET): $(OBJDIR) $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-ifeq ($(OS),Windows_NT)
-		MKDIR := @mkdir $(subst /,\,$(dir $@)) 2> NUL || exit 0	
-else
-		MKDIR := @mkdir -p
-endif
-
-# Executable name
-ifeq ($(OS),Windows_NT)
-    EXECUTABLE := $(BIN_DIR)/gosi.exe
-else
-    EXECUTABLE := $(BIN_DIR)/gosi
-endif
-
-all: $(EXECUTABLE)
-
-# Build rule
-$(EXECUTABLE): $(OBJ_FILES) $(SRC_DIR)/main.c | $(HEADER_FILES)
-	$(MKDIR) $(BIN_DIR)
-	@echo "Compiling" $(EXECUTABLE)
-	$(CC) $(OBJ_FILES) $(SRC_DIR)/main.c -o $@ $(LDFLAGS)
-
-# Compile rule
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(HEADER_FILES)
-	$(MKDIR)  $(dir $@)
+# Rule to build object files
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Include dependencies
+-include $(OBJS:.o=.d)
 
-
-
-# Clean target
+# Clean rule
 clean:
-ifeq ($(OS),Windows_NT)
-	@rm -R  $(OBJ_DIR) $(EXECUTABLE)
-else
-	@rm -rf $(OBJ_DIR) $(EXECUTABLE)
-endif
+	rm -rf $(OBJDIR) $(TARGET)
 
-# Include dependency files
--include $(OBJ_FILES:.o=.d)
+# Phony targets
 .PHONY: all clean

@@ -8,6 +8,13 @@ Token *Token_new(enum TokenType type, TokenValue *value) {
     return token;
 }
 
+Token *Token_cast(enum TokenType type, TokenValue *value) {
+    Token *token = malloc(sizeof(Token));
+    token->type = type;
+    token->value =  value;
+    return token;
+}
+
 void Token_free(Token *token) {
     if (token->value) {
         TokenValue_free(token->value);
@@ -22,12 +29,7 @@ Token *TokenValue_new( enum TokenType type, TokenValue *value) {
     return token;
 }
 
-Token *TokenValue_cast( enum TokenType type, TokenValue *value) {
-    Token *token = malloc(sizeof(Token));
-    token->type = type;
-    token->value =  value;
-    return token;
-}
+
 
 
 void TokenValue_free(TokenValue *value) {
