@@ -25,7 +25,7 @@ Token *TokenValue_new( enum TokenType type, TokenValue *value) {
 Token *TokenValue_cast( enum TokenType type, TokenValue *value) {
     Token *token = malloc(sizeof(Token));
     token->type = type;
-    token->value = TokenValue_new(type, value);
+    token->value =  value;
     return token;
 }
 

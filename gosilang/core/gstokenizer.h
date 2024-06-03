@@ -1,5 +1,6 @@
 #ifndef GSTOKENIZER_H
 #define GSTOKENIZER_H
+
 #define CORE // for debugging purposes
 
 #include <stdlib.h>
@@ -24,6 +25,7 @@ Token *Tokenizer_next(Tokenizer *tokenizer);
 Token *Tokenizer_peek(Tokenizer *tokenizer);
 Token *Tokenizer_advance(Tokenizer *tokenizer);
 Token *Tokenizer_consume(Tokenizer *tokenizer, enum TokenType type);
+
 
 
 #endif // GSTOKENIZER_H

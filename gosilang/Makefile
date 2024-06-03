@@ -4,10 +4,10 @@ CFLAGS := -I$(INCLUDE_DIR) -MMD -Wall -Wextra -Werror -g -O0 -std=c2x -Wpedantic
 LDFLAGS:= -lm
 
 # Directories
-SRC_DIR := .
-OBJ_DIR := $(SRC_DIR)/obj
-BIN_DIR := $(SRC_DIR)/bin
-INCLUDE_DIR := $(SRC_DIR)/include
+SRC_DIR := core
+OBJ_DIR := /obj
+BIN_DIR := /bin
+INCLUDE_DIR := include
 
 # Source files
 SRC_FILES := $(wildcard $(SRC_DIR)/**/*.c)
